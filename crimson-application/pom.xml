@@ -16,6 +16,7 @@
 
     <modules>
         <module>executable</module>
+        <module>crimson-modules</module>
     </modules>
 
     <dependencyManagement>
