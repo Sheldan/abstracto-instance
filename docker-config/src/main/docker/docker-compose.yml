@@ -17,6 +17,8 @@ services:
     restart: on-failure
     environment:
       TOKEN: ${TOKEN}
+    volumes:
+      - ./logs:/logs
   pgadmin:
     container_name: pgadmin_container
     image: dpage/pgadmin4
