@@ -33,4 +33,4 @@ jobs:
           username: ${{ secrets.SSH_USER }}
           key: ${{ secrets.PRIVATE_SSH }}
           port: ${{ secrets.SSH_PORT }}
-          script: "docker-compose up -d"
+          script: "TOKEN=${{ secrets.TOKEN }} && docker-compose up -d"

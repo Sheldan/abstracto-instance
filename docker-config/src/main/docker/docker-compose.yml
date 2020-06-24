@@ -15,6 +15,8 @@ services:
     depends_on:
       - db
     restart: on-failure
+    environment:
+      TOKEN: ${TOKEN}
   pgadmin:
     container_name: pgadmin_container
     image: dpage/pgadmin4
