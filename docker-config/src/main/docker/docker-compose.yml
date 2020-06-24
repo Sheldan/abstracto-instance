@@ -1,0 +1,18 @@
+version: '3.7'
+
+services:
+  db:
+    image: postgres
+    container_name: database_container
+    restart: always
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_PASSWORD: abstracto
+      POSTGRES_USER: abstracto
+  bot:
+    build: .
+    image: crimson
+    depends_on:
+      - db
+    restart: on-failure
