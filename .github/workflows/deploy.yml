@@ -17,3 +17,12 @@ jobs:
           port: ${{ secrets.SSH_PORT }}
           source: "docker-config/src/main/docker/docker-compose.yml"
           target: "/home/${{ secrets.SSH_USER }}"
+          strip_components: 4
+      - name: execute docker-compose
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.HOST }}
+          username: ${{ secrets.SSH_USER }}
+          key: ${{ secrets.PRIVATE_SSH }}
+          port: ${{ secrets.SSH_PORT }}
+          script: "docker-compose up -d"
