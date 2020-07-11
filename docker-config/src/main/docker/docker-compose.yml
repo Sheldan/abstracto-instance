@@ -5,30 +5,63 @@ services:
     image: postgres
     container_name: database_container
     restart: always
-    ports:
-      - "5432:5432"
     environment:
       POSTGRES_PASSWORD: abstracto
       POSTGRES_USER: abstracto
-  bot:
-    image: docker.pkg.github.com/sheldan/crimson/crimson
+    networks:
+      - crimson
+  deployment_container:
+    container_name: ansible_container
+    image: deployment-container
     depends_on:
       - db
+    environment:
+      DB_PASS: ${DATABASE_PASSWORD}
+      DB_HOST: ${DATABASE_HOST:-database_container}
+      DB_PORT: ${DATABASE_PORT:-5432}
+      DB_USER: ${DATABASE_USER:-abstracto}
+      DB_NAME: ${DATABASE_NAME:-abstracto}
+      TEMPLATE_VERSION: ${TEMPLATE_VERSION}
+      EXECUTE_DEPLOYMENT: ${EXECUTE_DEPLOYMENT:-true}
+      LIQUIBASE_PATH: ${LIQUIBASE_PATH:-/liquibase}
+      POSTGRES_DRIVER_PATH: ${EXECUTE_DEPLOYMENT:-/postgres/driver.jar}
+    volumes:
+      - ~/.m2/:/root/.m2
+    networks:
+      - crimson
+  bot:
+    image: crimson
+    depends_on:
+      - db
+      - deployment_container
     restart: on-failure
     environment:
       TOKEN: ${TOKEN}
+      REMOTE_DEBUG: ${REMOTE_DEBUG:-false}
+    command: sh -c "while ping -c1 ansible_container &>/dev/null; do sleep 1; done; echo 'Liquibase finished!' && ./start.sh"
     volumes:
       - ./logs:/logs
+    ports:
+      - "5005:5005"
+    networks:
+      - crimson
   pgadmin:
     container_name: pgadmin_container
     image: dpage/pgadmin4
     depends_on:
       - db
     environment:
-      PGADMIN_DEFAULT_EMAIL: ${PGADMIN_DEFAULT_EMAIL:-pgadmin4@pgadmin.org}
+      PGADMIN_DEFAULT_EMAIL: ${PGADMIN_DEFAULT_EMAIL:-abstracto@sheldan.dev}
       PGADMIN_DEFAULT_PASSWORD: ${PGADMIN_DEFAULT_PASSWORD:-admin}
     volumes:
       - ./config/servers.json:/pgadmin4/servers.json
     ports:
       - "${PGADMIN_PORT:-5050}:80"
     restart: unless-stopped
+    networks:
+      - crimson
+
+networks:
+  crimson:
+    driver: bridge
+    name: crimson-network

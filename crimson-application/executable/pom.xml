@@ -56,18 +56,10 @@
             <groupId>dev.sheldan.abstracto.core</groupId>
             <artifactId>core-impl</artifactId>
             <version>${abstracto.version}</version>
-            <scope>runtime</scope>
         </dependency>
         <dependency>
             <groupId>dev.sheldan.abstracto.templating</groupId>
             <artifactId>templating-impl</artifactId>
-            <version>${abstracto.version}</version>
-            <scope>runtime</scope>
-        </dependency>
-
-        <dependency>
-            <groupId>dev.sheldan.abstracto.templating</groupId>
-            <artifactId>template-config</artifactId>
             <version>${abstracto.version}</version>
         </dependency>
 

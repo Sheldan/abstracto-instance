@@ -17,5 +17,12 @@
                 <include>*.properties</include>
             </includes>
         </fileSet>
+        <fileSet>
+            <outputDirectory>.</outputDirectory>
+            <directory>${project.basedir}/src/main/docker/wrapper</directory>
+            <includes>
+                <include>**/*</include>
+            </includes>
+        </fileSet>
     </fileSets>
 </assembly>

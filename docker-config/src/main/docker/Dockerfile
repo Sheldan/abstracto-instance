@@ -3,4 +3,5 @@ MAINTAINER Sheldan
 VOLUME /tmp
 ADD lib/*executable-jar.jar /app.jar
 ADD lib/*.properties /
-CMD java -jar app.jar
+ADD lib/*.sh /
+RUN chmod +x /start.sh
