@@ -21,12 +21,12 @@ services:
       DB_PORT: ${DATABASE_PORT:-5432}
       DB_USER: ${DATABASE_USER:-abstracto}
       DB_NAME: ${DATABASE_NAME:-abstracto}
-      TEMPLATE_VERSION: ${TEMPLATE_VERSION}
       EXECUTE_DEPLOYMENT: ${EXECUTE_DEPLOYMENT:-true}
       LIQUIBASE_PATH: ${LIQUIBASE_PATH:-/liquibase}
       POSTGRES_DRIVER_PATH: ${EXECUTE_DEPLOYMENT:-/postgres/driver.jar}
     volumes:
       - ~/.m2/:/root/.m2
+      - ./ansible/:/tmp/installer/ansible
     networks:
       - crimson
   bot:
@@ -35,12 +35,19 @@ services:
       - db
       - deployment_container
     restart: on-failure
+    container_name: crimson
     environment:
       TOKEN: ${TOKEN}
       REMOTE_DEBUG: ${REMOTE_DEBUG:-false}
+      DB_PASS: ${DATABASE_PASSWORD}
+      DB_HOST: ${DATABASE_HOST:-database_container}
+      DB_PORT: ${DATABASE_PORT:-5432}
+      DB_USER: ${DATABASE_USER:-abstracto}
+      DB_NAME: ${DATABASE_NAME:-abstracto}
     command: sh -c "while ping -c1 ansible_container &>/dev/null; do sleep 1; done; echo 'Liquibase finished!' && ./start.sh"
     volumes:
       - ./logs:/logs
+      - ./config/:/config
     ports:
       - "5005:5005"
     networks:
