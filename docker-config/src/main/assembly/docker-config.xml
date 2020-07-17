@@ -27,6 +27,7 @@
             <directory>${project.basedir}/src/main/docker/</directory>
             <includes>
                 <include>docker-compose.yml</include>
+                <include>docker-compose-update.yml</include>
             </includes>
         </fileSet>
     </fileSets>
