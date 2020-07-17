@@ -22,6 +22,8 @@ services:
       DB_USER: ${DATABASE_USER:-abstracto}
       DB_NAME: ${DATABASE_NAME:-abstracto}
       EXECUTE_DEPLOYMENT: ${EXECUTE_DEPLOYMENT:-true}
+      EXECUTE_LIQUIBASE: ${EXECUTE_LIQUIBASE:-true}
+      EXECUTE_TEMPLATES: ${EXECUTE_TEMPLATES:-true}
       LIQUIBASE_PATH: ${LIQUIBASE_PATH:-/liquibase}
       POSTGRES_DRIVER_PATH: ${EXECUTE_DEPLOYMENT:-/postgres/driver.jar}
     volumes:
