@@ -29,6 +29,8 @@
 
     </appender>
 
+    <logger name="dev.sheldan.abstracto" level="INFO"/>
+
     <root level="info">
         <appender-ref ref="logFileAppender"/>
         <appender-ref ref="stdout"/>

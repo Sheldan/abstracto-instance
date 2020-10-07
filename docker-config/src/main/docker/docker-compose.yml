@@ -10,6 +10,8 @@ services:
       POSTGRES_USER: abstracto
     networks:
       - crimson
+    volumes:
+      - ./sql/init.sql:/docker-entrypoint-initdb.d/init.sql
   deployment_container:
     container_name: ansible_container
     image: deployment-container

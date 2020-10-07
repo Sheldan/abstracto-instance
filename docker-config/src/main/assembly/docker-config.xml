@@ -23,6 +23,13 @@
             </includes>
         </fileSet>
         <fileSet>
+            <outputDirectory>./sql</outputDirectory>
+            <directory>${project.basedir}/src/main/docker/sql</directory>
+            <includes>
+                <include>**/*</include>
+            </includes>
+        </fileSet>
+        <fileSet>
             <outputDirectory>.</outputDirectory>
             <directory>${project.basedir}/src/main/docker/</directory>
             <includes>
