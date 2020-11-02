@@ -1,0 +1,25 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: pg-admin
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: pg_admin
+  template:
+    metadata:
+      labels:
+        app: pg_admin
+    spec:
+      containers:
+        - name: app
+          image: localhost:32000/crimson_pg_admin:latest
+          env:
+            - name: PGADMIN_DEFAULT_EMAIL
+              value: 'crimson@sheldan.dev'
+            - name: PGADMIN_DEFAULT_PASSWORD
+              value: admin
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 80
