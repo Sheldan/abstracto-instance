@@ -7,13 +7,9 @@ services:
   database:
     build: database
     image: crimson_database:latest
-    ports:
-      - "5432:5432"
   pg_admin:
     build: pgAdmin
     image: crimson_pg_admin:latest
-    ports:
-      - "${PGADMIN_PORT:-5050}:80"
   deployment_container:
     build: deployment
     image: crimson_deployment:latest

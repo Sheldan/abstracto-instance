@@ -1,6 +1,6 @@
 {
-  "template_artifacts": ["utility", "modmail", "moderation", "experience-tracking", "core", "assignable-roles"],
-  "translation_artifacts": ["utility", "modmail", "moderation", "experience-tracking", "core", "assignable-roles"],
+  "template_artifacts": ["utility", "modmail", "moderation", "experience-tracking", "core", "assignable-roles", "statistic"],
+  "translation_artifacts": ["utility", "modmail", "moderation", "experience-tracking", "core", "assignable-roles", "statistic"],
   "liquibase_artifacts": [
     { "zip": "scheduling", "file": "scheduling-changeLog.xml" },
     { "zip": "templating", "file": "templating-changeLog.xml"},
@@ -9,7 +9,8 @@
     { "zip": "moderation", "file": "moderation-changeLog.xml"},
     { "zip": "modmail", "file": "modMail-changeLog.xml"},
     { "zip": "utility", "file": "utility-changeLog.xml"},
-    { "zip": "assignable-roles", "file": "assignableRoles-changeLog.xml"}
+    { "zip": "assignable-roles", "file": "assignableRoles-changeLog.xml"},
+    { "zip": "statistic", "file": "statistic-changeLog.xml"}
   ]
 }
 
