@@ -5,7 +5,7 @@
       "Group": "Server Group 1",
       "Port": 5432,
       "Username": "abstracto",
-      "Host": "database_container",
+      "Host": "postgres-service",
       "SSLMode": "prefer",
       "MaintenanceDB": "postgres"
     }

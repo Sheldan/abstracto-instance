@@ -26,6 +26,16 @@ spec:
                 secretKeyRef:
                   name: db-credentials
                   key: dbPassword
+            - name: REST_USER_NAME
+              valueFrom:
+                secretKeyRef:
+                  name: crimson-credentials
+                  key: userName
+            - name: REST_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: crimson-credentials
+                  key: password
             - name: DB_PORT
               valueFrom:
                 configMapKeyRef:

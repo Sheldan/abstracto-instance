@@ -3,7 +3,7 @@ version: '3.7'
 services:
   db:
     image: crimson_database
-    container_name: database_container
+    container_name: database
     restart: always
     environment:
       POSTGRES_PASSWORD: ${DATABASE_PASSWORD}
@@ -13,13 +13,13 @@ services:
     networks:
       - crimson
   deployment_container:
-    container_name: deployment_container
+    container_name: deployment
     image: crimson_deployment
     depends_on:
       - db
     environment:
       DB_PASS: ${DATABASE_PASSWORD}
-      DB_HOST: ${DATABASE_HOST:-database_container}
+      DB_HOST: ${DATABASE_HOST:-database}
       DB_PORT: ${DATABASE_PORT:-5432}
       DB_USER: ${DATABASE_USER:-abstracto}
       DB_NAME: ${DATABASE_NAME:-abstracto}
@@ -28,7 +28,7 @@ services:
       EXECUTE_TEMPLATES: ${EXECUTE_TEMPLATES:-true}
       LIQUIBASE_PATH: ${LIQUIBASE_PATH:-/liquibase}
       POSTGRES_DRIVER_PATH: ${EXECUTE_DEPLOYMENT:-/postgres/driver.jar}
-      WAIT_HOSTS: database_container:5432
+      WAIT_HOSTS: database:5432
     networks:
       - crimson
   bot:
@@ -42,17 +42,20 @@ services:
       TOKEN: ${TOKEN}
       REMOTE_DEBUG: ${REMOTE_DEBUG:-false}
       DB_PASS: ${DATABASE_PASSWORD}
-      DB_HOST: ${DATABASE_HOST:-database_container}
+      DB_HOST: ${DATABASE_HOST:-database}
       DB_PORT: ${DATABASE_PORT:-5432}
       DB_USER: ${DATABASE_USER:-abstracto}
       DB_NAME: ${DATABASE_NAME:-abstracto}
+      REST_USER_NAME: ${REST_USER_NAME:-abstracto}
+      REST_PASSWORD: ${REST_PASSWORD:-password}
     command: sh -c "while ping -c1 deployment_container &>/dev/null; do sleep 1; done; echo 'Liquibase finished!' && ./start.sh"
     ports:
       - "5005:5005"
+      - "8080:8080"
     networks:
       - crimson
   pgadmin:
-    container_name: pgadmin_container
+    container_name: pgadmin
     image: crimson_pg_admin
     depends_on:
       - db
@@ -61,6 +64,27 @@ services:
       PGADMIN_DEFAULT_PASSWORD: ${PGADMIN_DEFAULT_PASSWORD:-admin}
     ports:
       - "${PGADMIN_PORT:-5050}:80"
+    restart: unless-stopped
+    networks:
+      - crimson
+  prometheus:
+    container_name: prometheus
+    image: crimson_prometheus
+    depends_on:
+      - bot
+    ports:
+      - "${PROMETHEUS_PORT:-9090}:9090"
+    restart: unless-stopped
+    networks:
+      - crimson
+  grafana:
+    container_name: grafana
+    image: crimson_grafana
+    depends_on:
+      - prometheus
+      - bot
+    ports:
+      - "${GRAFANA_PORT:-3000}:3000"
     restart: unless-stopped
     networks:
       - crimson

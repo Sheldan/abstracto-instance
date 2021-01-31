@@ -57,6 +57,13 @@
             <artifactId>core-impl</artifactId>
             <version>${abstracto.version}</version>
         </dependency>
+
+        <dependency>
+            <groupId>dev.sheldan.abstracto.core</groupId>
+            <artifactId>metrics-impl</artifactId>
+            <version>${abstracto.version}</version>
+        </dependency>
+
         <dependency>
             <groupId>dev.sheldan.abstracto.templating</groupId>
             <artifactId>templating-impl</artifactId>

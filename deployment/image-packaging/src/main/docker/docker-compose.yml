@@ -13,4 +13,9 @@ services:
   deployment_container:
     build: deployment
     image: crimson_deployment:latest
-
+  prometheus:
+    build: prometheus
+    image: crimson_prometheus:latest
+  grafana:
+    build: grafana
+    image: crimson_grafana:latest
