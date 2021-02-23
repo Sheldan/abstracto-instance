@@ -3,7 +3,6 @@
   "translation_artifacts": ["utility", "modmail", "moderation", "experience-tracking", "core", "assignable-roles", "statistic"],
   "liquibase_artifacts": [
     { "zip": "scheduling", "file": "scheduling-changeLog.xml" },
-    { "zip": "templating", "file": "templating-changeLog.xml"},
     { "zip": "core", "file": "core-changeLog.xml" },
     { "zip": "experience-tracking", "file": "experience-changeLog.xml" },
     { "zip": "moderation", "file": "moderation-changeLog.xml"},

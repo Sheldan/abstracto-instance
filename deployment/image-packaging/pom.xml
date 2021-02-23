@@ -188,17 +188,6 @@
                         </artifactItem>
 
                         <artifactItem>
-                            <groupId>dev.sheldan.abstracto.templating</groupId>
-                            <artifactId>templating-impl</artifactId>
-                            <version>${abstracto.version}</version>
-                            <classifier>liquibase</classifier>
-                            <type>zip</type>
-                            <overWrite>true</overWrite>
-                            <outputDirectory>${file.basedir}/deployment/liquibase-artifacts/</outputDirectory>
-                            <destFileName>templating.zip</destFileName>
-                        </artifactItem>
-
-                        <artifactItem>
                             <groupId>dev.sheldan.abstracto.core</groupId>
                             <artifactId>core-impl</artifactId>
                             <version>${abstracto.version}</version>

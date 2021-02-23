@@ -64,12 +64,6 @@
             <version>${abstracto.version}</version>
         </dependency>
 
-        <dependency>
-            <groupId>dev.sheldan.abstracto.templating</groupId>
-            <artifactId>templating-impl</artifactId>
-            <version>${abstracto.version}</version>
-        </dependency>
-
         <!-- modules containing commands -->
 
         <dependency>
